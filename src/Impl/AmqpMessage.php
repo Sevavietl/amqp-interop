@@ -4,13 +4,11 @@ declare(strict_types=1);
 namespace Interop\Amqp\Impl;
 
 use Interop\Amqp\AmqpMessage as InteropAmqpMessage;
+use Interop\Queue\Impl\StringBodyOnlyTrait;
 
 final class AmqpMessage implements InteropAmqpMessage
 {
-    /**
-     * @var string
-     */
-    private $body;
+    use StringBodyOnlyTrait;
 
     /**
      * @var array
@@ -55,16 +53,6 @@ final class AmqpMessage implements InteropAmqpMessage
 
         $this->redelivered = false;
         $this->flags = self::FLAG_NOPARAM;
-    }
-
-    public function getBody(): string
-    {
-        return $this->body;
-    }
-
-    public function setBody(string $body): void
-    {
-        $this->body = $body;
     }
 
     public function setProperties(array $properties): void
